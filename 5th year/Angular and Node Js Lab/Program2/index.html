@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Program 2</title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="../angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <h1>Shopping List </h1>
+    <div ng-controller="myController">
+        <ul>
+            <li ng-repeat="item in shoppingItems">{{item}}</li>
+        </ul>
+        <label> Enter item to add : </label>
+        <input type="text" ng-model="itemToAdd">
+        <button ng-click="addItem()"> Add Item </button>
+        <br><br>
+        <label> Enter item to delete : </label>
+        <select ng-model="itemToDelete" ng-options="item for item in shoppingItems"> </select>
+        <button ng-click="deleteItem()"> Delete Item </button>
+    </div>
+</body>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myController", function ($scope) {
+        $scope.shoppingItems = ["Apple", "Mango", "Angular"];
+        $scope.addItem = function () {
+            if ($scope.itemToAdd && $scope.shoppingItems.indexOf($scope.itemToAdd) == -1) {
+                $scope.shoppingItems.push($scope.itemToAdd);
+                $scope.itemToAdd = "";
+            } else {
+                if (!$scope.itemToAdd) {
+                    alert("Please enter item to add ");
+                } else {
+                    alert("This item already exists in the list ");
+                }
+            }
+        }
+        $scope.deleteItem = function () {
+            var index = $scope.shoppingItems.indexOf($scope.itemToDelete);
+            $scope.shoppingItems.splice(index, 1);
+            $scope.itemToDelete = "";
+        }
+    });  
+</script>
+
+</html>

@@ -1,0 +1,82 @@
+<html>
+
+<head>
+    <title> Program 6 </title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="../angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="show">
+        <h3>Enter todays plan</h3>
+        <input type="text" ng-model="newtodo">
+        <input type="button" value="add" ng-click="add()">
+        <h3>to-do list</h3>
+        <ul>
+            <li ng-repeat="list in todo">
+                <span ng-show="!list.EDITING">{{list.TITLE}}</span>
+                <input ng-show="list.EDITING" ng-model="list.TITLE" ng-blur="turnoffEditing(list)">
+                <input type="button" value="edit" ng-click="edit(list)">
+                <input type="button" value="del" ng-click="delete(list)">
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    var app = angular.module("myApp", [])
+    app.controller("show", function ($scope) {
+        $scope.todo = [
+            {
+                "TITLE": "Eat my breakfast",
+                "COMPLETED": true,
+                "EDITING": false
+            },
+            {
+                "TITLE": "brush my teeth",
+                "COMPLETED": true,
+                "EDITING": false
+            }
+
+        ]
+
+        $scope.add = function () {
+            if ($scope.newtodo && $scope.todo.indexOf($scope.newtodo) == -1) {
+                var list = {
+                    "TITLE": $scope.newtodo,
+                    "COMPLETED": false,
+                    "EDITING": false
+                }
+                $scope.todo.push(list)
+                $scope.newtodo = ""
+            }
+            else {
+                if (!$scope.newtodo) {
+                    alert("Pleasee enter some value")
+                } else {
+                    alert("Task already exist in To Do list ");
+                }
+            }
+        }
+        $scope.delete = function (list) {
+            var cnf = confirm("Do u want to delete record")
+            if (cnf == true) {
+                var rem = $scope.todo.indexOf(list)
+                $scope.todo.splice(rem, 1)
+            }
+            else {
+                alert("you choose not to delete this ")
+            }
+        }
+
+        $scope.edit = function (list) {
+            list.EDITING = true;
+
+        }
+        $scope.turnOffEditing = function (list) {
+            list.EDITING = false;
+        }
+    })
+</script>
+
+</html>

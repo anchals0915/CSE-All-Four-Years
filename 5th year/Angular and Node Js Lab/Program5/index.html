@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program 5 | Student Details ,CGPA </title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="../angular.min.js"></script>
+
+    <style>
+        table {
+            width: 500px;
+            margin: 1rem;
+            padding: 1rem;
+            border: 1px solid black;
+        }
+
+        tr,
+        td,
+        th {
+            border: 1px solid black;
+            margin: 1rem;
+            padding: 1rem;
+        }
+    </style>
+</head>
+
+<body ng-app="myApp">
+    <h1> Angular JS application to display student details and their CGPAs </h1>
+    <div ng-controller="myController">
+        <input type="number" ng-model="num" placeholder="Enter # of students">
+        <button ng-click="generate()"> Generate </button>
+
+        <table>
+            <tr>
+                <th> Sl# </th>
+                <th> Name </th>
+                <th> CGPA </th>
+            </tr>
+            <tr ng-repeat="student in studentData">
+                <td>{{student.Slno}}</td>
+                <td>{{student.Name}}</td>
+                <td>{{student.CGPA}}</td>
+            </tr>
+        </table>
+
+        #(students) = {{studentData.length}} ;
+    </div>
+</body>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myController", function ($scope) {
+        $scope.generate = function () {
+            $scope.studentData = [];
+            if ($scope.num > 100) {
+                alert("Please enter less than 100");
+            } else {
+                for (var data = 1; data <= $scope.num; data++) {
+                    var stu = {
+                        "Slno": data,
+                        "Name": "Student - " + data,
+                        "CGPA": (Math.random() * 10).toFixed(2)
+                    };
+                    $scope.studentData.push(stu);
+                }
+            }
+        }
+    }); 
+</script>
+
+</html>

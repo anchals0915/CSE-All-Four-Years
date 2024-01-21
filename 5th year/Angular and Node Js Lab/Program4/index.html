@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program 4 | Factorial & Square </title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="../angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <h1> Angular Js Application to Calculate Factorial and Square </h1>
+    <div ng-controller="myController">
+        <label> Enter a number : </label>
+        <input type="number" ng-model="num" placeholder="000000">
+        <button ng-click="fact()"> Factorial </button>
+        <button ng-click="squ()"> Square </button>
+
+        <p>Result for Factorial of <b> {{num}}! = {{factorial}} </b> </p>
+        <p>Result for Square of <b> {{num}}^2 = {{square}} </b> </p>
+    </div>
+</body>
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myController", function ($scope) {
+        $scope.fact = function () {
+            if (!$scope.num) {
+                alert("Please enter a number");
+            }
+            if ($scope.num < 0) {
+                alert("Factorial cannot be found for negative number .");
+            }
+            if ($scope.num >= 0) {
+                $scope.factorial = 1;
+                for (let i = 1; i <= $scope.num; i++) {
+                    $scope.factorial = $scope.factorial * i;
+                }
+            }
+        }
+        $scope.squ = function () {
+            if (!$scope.num) {
+                alert("Please enter a number");
+            } else {
+                $scope.square = $scope.num * $scope.num;
+            }
+        }
+    });
+</script>
+
+</html>

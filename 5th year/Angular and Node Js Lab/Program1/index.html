@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program 1 </title>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <script src="../angular.min.js"></script>
+</head>
+<body ng-app = "myApp" >
+    <div ng-controller="myController">
+        <h1>Angular JS Application to display the Full name </h1>
+        <label> Enter First name : </label>
+        <input type="text" ng-model="fn">
+        <br>
+        <br>
+        <label> Enter last name : </label>
+        <input type="text" ng-model="ln">
+
+        <h2> My Full name is {{fn+" "+ln}}</h2>
+    </div>
+</body>
+<script>
+    var app = angular.module("myApp",[]);
+    app.controller("myController" , function($scope) {
+        $scope.fn = "Anchal" ;
+        $scope.ln = "Singh" ; 
+    }) ; 
+</script>
+</html>
